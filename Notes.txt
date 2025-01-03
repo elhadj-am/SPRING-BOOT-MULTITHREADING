@@ -20,3 +20,54 @@ Probleme :
 
 
 - Faire une comparaisons entre normal threads et virtual threads 
+
+
+For Virtual Threads : 
+	we need : SPRING 3.2  and Java 21 
+
+
+
+
+# Constat dans un proces normal : ( 1 thread "main" ) 
+
+	Pour lance : un traitement de 3 secondeds sur 10 threads, => Implique une attente de 30 secondes. 
+
+	10 x http://localhost:8080/block/3
+
+
+	Propriete : 
+		server.tomcat.threads.max=10
+
+
+
+
+Ojectif / Optimisation 
+
+Propriete : 
+	spring.threads.virtual.enabled=true
+
+
+Ici meme pour un ordi au Nombre total de cœurs = 10; 
+
+Nous pouvons faire passer des requetes "Threads virtuels" 
+- example : 20 rerquetes a la fois. 
+
+
+Donc pour ecouler 60 requetes , on aura : 
+
+3 secondes pour chaque 20 requtes => Total 3 * 3 = 9 secondes. 
+
+
+
+
+Tools : 
+threads number request in postman 
+	crlt+shift+R 
+on mac 
+	cmd+shift+R 
+
+
+	and edit number of itterations. 
+
+
+How to see the bench marks ? 
