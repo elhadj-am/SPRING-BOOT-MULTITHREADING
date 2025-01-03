@@ -1,0 +1,22 @@
+# SPRING-BOOT-MULTITHREADING NOTES
+
+
+
+spring boot multithreading
+
+
+
+- New Feature of Spring Boot : Virtual Threads
+- Pourquoi less virtual threads ? 
+
+
+Probleme :
+	- Thread per request Model 
+		Maximum number of concurrent threads that are allowed.
+
+
+- virtual threads ne sont liées a aucune platform thread, ils s’occupèrent de venir faire le job et disparaîtretre complement. 
+
+
+
+- Faire une comparaisons entre normal threads et virtual threads 
