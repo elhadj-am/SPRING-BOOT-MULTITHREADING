@@ -22,28 +22,36 @@ public class UserService {
 
     private UserRepository  userRepository;
 
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     Object target;
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Async
     public CompletableFuture<List<User>> saveUser(MultipartFile file) throws Exception {
         long startTime = System.currentTimeMillis();
-        long endTime = System.currentTimeMillis();
         List<User> users = parceCSVFile(file);
-        logger.info("Saving list of users with size = {}", users.size(), " "+ Thread.currentThread().getName());
+        //logger.info("Saving list of users with size = {}", users.size(), " "+ Thread.currentThread().getName());
         users = userRepository.saveAll(users);
-        long end = System.currentTimeMillis();
-        logger.info("Total time {}", (end - startTime));
+        long endTime = System.currentTimeMillis();
+        //logger.info("Total time {}", (endTime - startTime));
+        logger.info("Saving list of users with size = {}", users.size() +" "+ Thread.currentThread().getName() + " -Total time  " +  (endTime - startTime));
+
         return CompletableFuture.completedFuture(users);
     }
 
+    @Async
     public CompletableFuture findAllUsers() {
-        logger.info("Finding all users by " + Thread.currentThread().getName());
+        long startTime = System.currentTimeMillis();
         List<User> users = userRepository.findAll();
+        long endTime = System.currentTimeMillis();
+        logger.info("Get List of users by " + Thread.currentThread().getName() + "    -Total time: {} ms", (endTime - startTime));
         return CompletableFuture.completedFuture(users);
     }
 
-    private List<User> parceCSVFile(MultipartFile file) throws Exception {
+    public List<User> parceCSVFile(MultipartFile file) throws Exception {
         final List<User> users = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             String line;
