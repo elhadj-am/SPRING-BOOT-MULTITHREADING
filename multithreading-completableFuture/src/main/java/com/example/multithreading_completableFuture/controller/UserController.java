@@ -18,6 +18,7 @@ import java.util.concurrent.CompletableFuture;
 public class UserController {
     private  UserService userService;
 
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -42,6 +43,7 @@ public class UserController {
         CompletableFuture<List<User>> usersFuture2 = userService.findAllUsers();
         CompletableFuture<List<User>> usersFuture3 = userService.findAllUsers();
         CompletableFuture.allOf(usersFuture1, usersFuture2, usersFuture3).join();
+
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
