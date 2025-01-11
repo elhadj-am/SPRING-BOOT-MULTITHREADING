@@ -1,6 +1,4 @@
 package com.example.multithreading_completableFuture.entity;
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

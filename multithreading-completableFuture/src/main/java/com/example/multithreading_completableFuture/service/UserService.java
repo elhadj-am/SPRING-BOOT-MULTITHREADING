@@ -67,5 +67,4 @@ public class UserService {
             throw new Exception("Failled to parse CSV file {} ", e);
         }
     }
-
 }
